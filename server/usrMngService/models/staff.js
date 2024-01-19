@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const { Schema, model } = mongoose;
 
 const staffSchema = new Schema({
-  staffName: {
+  staffEmail: {
     type: String,
     required: true,
   },
