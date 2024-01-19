@@ -12,7 +12,12 @@ const groupSchema = new Schema({
     type: Number,
     required: true,
   },
-  
+
+  groupNo: {
+    type: Number,
+    required: true,
+  },
+
   groupTimeTable: {
     type: Schema.Types.Mixed,
     default: {},
