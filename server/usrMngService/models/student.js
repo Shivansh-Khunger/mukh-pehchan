@@ -7,23 +7,28 @@ const studentSchema = new Schema({
     type: String,
     required: true,
   },
+
   studentRollNo: {
     type: String,
     required: true,
   },
+
   studentGroup: {
     type: Number,
     required: true,
   },
+
   studentSession: {
     type: String,
     required: true,
     default: "2022-26",
   },
+
   studentSem: {
     type: String,
     required: true,
   },
+  
   studentFaceDescriptor: {
     type: [Number],
     required: true,
