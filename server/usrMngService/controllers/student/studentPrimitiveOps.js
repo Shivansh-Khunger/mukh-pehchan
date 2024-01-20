@@ -85,7 +85,5 @@ export async function updateAtt(req, res) {
         { $inc: { "subjectAttendance.$.attendance": 1 } }
       );
     }
-  } catch (err) {
-
-  }
+  } catch (err) {}
 }
