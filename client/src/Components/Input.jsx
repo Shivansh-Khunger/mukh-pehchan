@@ -1,12 +1,12 @@
-function Input({ label, setData , type }) {
+function Input({ label, setData , type , data }) {
   return (
-    <div className=" my-3">
+    <div className="my-3 ">
 
-    <input type = {type}
+    <input value={data} type = {type}
       onChange={(e) => {
         setData(e.target.value);
       }}
-      className=" outline-none w-full rounded-md  my-1 block bg-gray-300 px-3 py-2 "
+      className="block w-full px-3 py-2 my-1 bg-gray-300 rounded-md outline-none "
 
       placeholder={label}
     />

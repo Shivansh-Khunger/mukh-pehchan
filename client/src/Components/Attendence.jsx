@@ -1,15 +1,15 @@
 
-import Forms from "./Components/Forms";
-import Input from "./Components/Input";
+import Forms from "./Forms";
+import Input from "./Input";
 import { useEffect, useRef, useState } from "react";
-import Profile from "./Components/Profile";
-import ProfilePic from "./ProfilePic";
+import Profile from "./Profile";
+import ProfilePic from "../ProfilePic";
 
 
 
 import { Link, NavLink } from "react-router-dom";
 
-function App() {
+function Attendence() {
   const [name, setName] = useState("");
   const [roll, setRollNo] = useState("");
   const [grpNo, setGrpNo] = useState("");
@@ -49,9 +49,9 @@ function App() {
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen overflow-hidden bg-gray-800 ">
       <div className="flex items-center text-white mb-9 gap-x-2">
-      <NavLink className="mb-1 text-2xl font-semibold text-white" to = {'/'}>Register Student</NavLink>
+      <NavLink className="mb-1 text-2xl font-semibold text-white " to = {'/'}>Register Student</NavLink>
         <p className="text-4xl font-semibold ">/</p>
-        <NavLink className="mb-1 text-2xl font-semibold text-white" to = {'a'}>Upload Attendence</NavLink>
+        <NavLink className="mb-1 text-2xl font-semibold text-white hover:font-bold" to = {'/a'}>Upload Attendence</NavLink>
       </div>
        
       {!take && (
@@ -59,22 +59,22 @@ function App() {
           <div className="flex items-center gap-x-1">
         
           <p className="font-mono text-3xl font-semibold tracking-widest text-center text-white to-white">
-            Register Student
+            Upload Attendence
           </p>
   
           </div>
          
           <div>
-            <Input data={name} label={"Name "} setData={setName} type={"text"} />
+            <Input data={name} label={"Subject "} setData={setName} type={"text"} />
             {done === 0 && (
               <p className="mb-1 text-sm text-red-500 ">**wrong input</p>
             )}
-            <Input data={roll} label={"Roll No "} setData={setRollNo} type={"text"} />
+            {/* <Input data={roll} label={"Roll No "} setData={setRollNo} type={"text"} />
             {done === 1 && (
               <p className="mb-1 text-sm text-red-500 ">**wrong input</p>
-            )}
+            )} */}
 
-            <label className="p-2 font-bold text-white rounded-md ">
+            <label className="p-2 font-bold text-white rounded-lg">
               Group No
             </label>
             <select
@@ -147,4 +147,4 @@ function App() {
   );
 }
 
-export default App;
+export default Attendence;
