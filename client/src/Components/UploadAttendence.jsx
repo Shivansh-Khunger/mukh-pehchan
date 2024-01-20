@@ -1,15 +1,14 @@
 
-import Forms from "./Components/Forms";
-import Input from "./Components/Input";
-import { useEffect, useRef, useState } from "react";
-import Profile from "./Components/Profile";
-import ProfilePic from "./ProfilePic";
+import Forms from "./Forms";
+import Input from "./Input";
+import {useRef, useState } from "react";
+import Profile from "./Profile";
+import ProfilePic from "../ProfilePic";
 
 
 
-import { Link, NavLink } from "react-router-dom";
 
-function App() {
+function UploadAttendence() {
   const [name, setName] = useState("");
   const [roll, setRollNo] = useState("");
   const [grpNo, setGrpNo] = useState("");
@@ -48,11 +47,7 @@ function App() {
 
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen overflow-hidden bg-gray-800 ">
-      <div className="flex items-center text-white mb-9 gap-x-2">
-      <NavLink className="mb-1 text-2xl font-semibold text-white" to = {'/'}>Register Student</NavLink>
-        <p className="text-4xl font-semibold ">/</p>
-        <NavLink className="mb-1 text-2xl font-semibold text-white" to = {'a'}>Upload Attendence</NavLink>
-      </div>
+
 
       {!take && (
         <Forms>
@@ -147,4 +142,4 @@ function App() {
   );
 }
 
-export default App;
+export default UploadAttendence;
