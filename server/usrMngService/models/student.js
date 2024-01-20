@@ -28,12 +28,25 @@ const studentSchema = new Schema({
     type: String,
     required: true,
   },
-  
+
   studentFaceDescriptor: {
-    type: [Number],
+    type: String,
     required: true,
-    default: [],
+    default: "",
   },
+
+  subjectAttendance: [
+    {
+      subject: {
+        type: String,
+        required: true,
+      },
+      attendance: {
+        type: Number,
+        required: true,
+      },
+    },
+  ],
 });
 
 const student = model("students", studentSchema);
