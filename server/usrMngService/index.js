@@ -35,7 +35,7 @@ app.listen(PORT, () => {
 });
 
 app.get("/", (req, res) => {
-  res.send("welcome to barGAt base.");
+  res.send("welcome to user management service of Mukh Pehchan.");
 });
 
 app.use("/s", studentRoutes);
