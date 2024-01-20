@@ -1,1 +1,1 @@
-export * from "./student/studentPrimitiveOperations.js";
+export * from "./student/studentPrimitiveOps.js";
