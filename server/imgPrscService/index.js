@@ -2,11 +2,9 @@ import { logger, httpLogger } from "./logger.js";
 import connectingToDb from "./config/db.js";
 import setHeaders from "./config/headers.js";
 import hashPassword from "./helper/hashPassword.js";
+import imageRoutes from "./routes/imgRoutes.js";
 
 // logger.info(await hashPassword("polyphasic"));
-
-import studentRoutes from "./routes/studentRoutes.js";
-import staffRoutes from "./routes/staffRoutes.js";
 
 import express from "express";
 import "dotenv/config";
@@ -38,5 +36,4 @@ app.get("/", (req, res) => {
   res.send("welcome to barGAt base.");
 });
 
-app.use("/s", studentRoutes);
-app.use("/st", staffRoutes);
+app.use("/up", imageRoutes);
