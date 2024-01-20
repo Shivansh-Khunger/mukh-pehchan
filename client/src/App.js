@@ -3,9 +3,12 @@ import "./App.css";
 import "./index.css";
 import Forms from "./Components/Forms";
 import Input from "./Components/Input";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Profile from "./Components/Profile";
 import ProfilePic from "./ProfilePic";
+
+import * as faceapi from 'face-api.js';
+
 
 function App() {
   const [name, setName] = useState("");
@@ -14,6 +17,15 @@ function App() {
   const [take, setTake] = useState(false);
   const [picture, setPicture] = useState("");
   const [done, setDone] = useState(-1);
+  const id = useRef(null)
+  async function  detectFace (){
+    const detections1 = await faceapi.detectAllFaces(id.current, new faceapi.SsdMobilenetv1Options())
+    const detections2 = await faceapi.detectAllFaces(id.current, new faceapi.TinyFaceDetectorOptions())
+  }
+  useEffect(()=>{
+    console.log(id.current)
+  },[])
+
   function isValid() {
     if(name.length === 0){
       setDone(0)
@@ -82,7 +94,7 @@ function App() {
               </div>
 
             ) : (
-              <img
+              <img ref={id}
                 className=" w-52 h-52 rounded-full shadow-2xl"
                 src={picture}
               />
@@ -102,6 +114,7 @@ function App() {
               onClick={(e) => {
                 e.preventDefault();
                 isValid();
+                detectFace()
               }}
               className=" px-3 hover:shadow-xl hover:shadow-white/10 transition-all duration-150 py-2 rounded-md bg-white w-fit text-gray-600 tracking-wider"
             >
