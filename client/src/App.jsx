@@ -7,8 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import Profile from "./Components/Profile";
 import ProfilePic from "./ProfilePic";
 
-import * as faceapi from 'face-api.js';
-
+import * as faceapi from "face-api.js";
 
 function App() {
   const [name, setName] = useState("");
@@ -17,21 +16,37 @@ function App() {
   const [take, setTake] = useState(false);
   const [picture, setPicture] = useState("");
   const [done, setDone] = useState(-1);
-  const id = useRef(null)
-  async function  detectFace (){
-    const detections1 = await faceapi.detectAllFaces(id.current, new faceapi.SsdMobilenetv1Options())
-    const detections2 = await faceapi.detectAllFaces(id.current, new faceapi.TinyFaceDetectorOptions())
+  const id = useRef(null);
+
+  async function loadModels() {
+    await faceapi.nets.tinyFaceDetector.loadFromUri("/");
+    await faceapi.nets.faceLandmark68Net.loadFromUri("/");
+    await faceapi.nets.faceRecognitionNet.loadFromUri("/");
   }
-  useEffect(()=>{
-    console.log(id.current)
-  },[])
+
+  loadModels();
+
+  async function detectFace() {
+    console.log("here");
+    const detections1 = await faceapi
+      .detectSingleFace(id.current)
+      .withFaceLandmarks()
+      .withFaceExpressions()
+      .withFaceDescriptor();
+
+    console.log(detections1);
+  }
+
+  useEffect(() => {
+    console.log(id.current);
+  }, []);
 
   function isValid() {
-    if(name.length === 0){
-      setDone(0)
-      return
+    if (name.length === 0) {
+      setDone(0);
+      return;
     }
-    if (roll.length === 0 ) {
+    if (roll.length === 0) {
       setDone(1);
       return;
     }
@@ -42,9 +57,9 @@ function App() {
         return;
       }
     }
-    if(picture === ''){
-      setDone(2)
-      return
+    if (picture === "") {
+      setDone(2);
+      return;
     }
 
     setDone(-1);
@@ -59,11 +74,11 @@ function App() {
           </p>
           <div>
             <Input label={"Name "} setData={setName} type={"text"} />
-            { done ===0 && (
+            {done === 0 && (
               <p className=" text-red-500 text-sm mb-1">**wrong input</p>
             )}
             <Input label={"Roll No "} setData={setRollNo} type={"text"} />
-            { done ===1 && (
+            {done === 1 && (
               <p className=" text-red-500 text-sm mb-1">**wrong input</p>
             )}
 
@@ -85,16 +100,12 @@ function App() {
           <div className=" flex justify-center">
             {picture === "" ? (
               <div className=" flex flex-col justify-between items-center">
-
-              <ProfilePic />
-              {
-                done ===2 && ( <p className=" text-red-500 ">**input image</p>)
-              }
-
+                <ProfilePic />
+                {done === 2 && <p className=" text-red-500 ">**input image</p>}
               </div>
-
             ) : (
-              <img ref={id}
+              <img
+                ref={id}
                 className=" w-52 h-52 rounded-full shadow-2xl"
                 src={picture}
               />
@@ -114,7 +125,7 @@ function App() {
               onClick={(e) => {
                 e.preventDefault();
                 isValid();
-                detectFace()
+                detectFace();
               }}
               className=" px-3 hover:shadow-xl hover:shadow-white/10 transition-all duration-150 py-2 rounded-md bg-white w-fit text-gray-600 tracking-wider"
             >
