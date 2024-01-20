@@ -10,12 +10,13 @@ const Profile = ({ setPicture, picture , setTake}) => {
   const webcamRef = React.useRef(null);
   const capture = React.useCallback(() => {
     const pictureSrc = webcamRef.current.getScreenshot();
+    setTake(true)
 
     setPicture(pictureSrc);
   });
   return (
-    <div className=" flex flex-col justify-center rounded-md items-center space-y-2 overflow-hidden">
-      <div className=" w-[600px] h-[720px]">
+    <div className=" flex flex-col justify-center rounded-md items-center space-y-2 ">
+      <div className=" w-fit h-fit ">
         {picture == "" ? (
           <Webcam
             className=" rounded-md"
