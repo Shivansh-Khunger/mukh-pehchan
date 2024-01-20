@@ -34,5 +34,9 @@ app.listen(PORT, () => {
   logger.info(`-> now listening at http://localhost:${PORT}/`);
 });
 
+app.get("/", (req, res) => {
+  res.send("welcome to barGAt base.");
+});
+
 app.use("/s", studentRoutes);
 app.use("/st", staffRoutes);
