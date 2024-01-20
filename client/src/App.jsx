@@ -1,11 +1,9 @@
-
 import Forms from "./Components/Forms";
 import Input from "./Components/Input";
 import { useEffect, useRef, useState } from "react";
 import Profile from "./Components/Profile";
 import ProfilePic from "./ProfilePic";
-
-
+import axios from "axios";
 
 import { Link, NavLink } from "react-router-dom";
 
@@ -16,13 +14,10 @@ function App() {
   const [take, setTake] = useState(false);
   const [picture, setPicture] = useState("");
   const [done, setDone] = useState(-1);
-  const [student , setStudent] = useState(true);
+  const [student, setStudent] = useState(true);
   const id = useRef(null);
 
-
-
-
-  function isValid() {
+  async function isValid() {
     if (name.length === 0) {
       setDone(0);
       return;
@@ -43,33 +38,59 @@ function App() {
       return;
     }
 
+    await axios
+      .post("https://www.img.roohpehchan.co/up/one", {
+        triggerStuRollNo: roll,
+      })
+      .then((res) => {
+        if (res.data.valUpdated) {
+          alert("you are registered.");
+          setName("");
+          setRollNo("");
+          setPicture("");
+          setTake(false);
+        }
+      });
+
     setDone(-1);
   }
 
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen overflow-hidden bg-gray-800 ">
       <div className="flex items-center text-white mb-9 gap-x-2">
-      <NavLink className="mb-1 text-2xl font-semibold text-white" to = {'/'}>Register Student</NavLink>
+        <NavLink className="mb-1 text-2xl font-semibold text-white" to={"/"}>
+          Register Student
+        </NavLink>
         <p className="text-4xl font-semibold ">/</p>
-        <NavLink className="mb-1 text-2xl font-semibold text-white" to = {'a'}>Upload Attendence</NavLink>
+        <NavLink className="mb-1 text-2xl font-semibold text-white" to={"a"}>
+          Upload Attendence
+        </NavLink>
       </div>
 
       {!take && (
         <Forms>
           <div className="flex items-center gap-x-1">
-
-          <p className="font-mono text-3xl font-semibold tracking-widest text-center text-white to-white">
-            Register Student
-          </p>
-
+            <p className="font-mono text-3xl font-semibold tracking-widest text-center text-white to-white">
+              Register Student
+            </p>
           </div>
 
           <div>
-            <Input data={name} label={"Name "} setData={setName} type={"text"} />
+            <Input
+              data={name}
+              label={"Name "}
+              setData={setName}
+              type={"text"}
+            />
             {done === 0 && (
               <p className="mb-1 text-sm text-red-500 ">**wrong input</p>
             )}
-            <Input data={roll} label={"Roll No "} setData={setRollNo} type={"text"} />
+            <Input
+              data={roll}
+              label={"Roll No "}
+              setData={setRollNo}
+              type={"text"}
+            />
             {done === 1 && (
               <p className="mb-1 text-sm text-red-500 ">**wrong input</p>
             )}
@@ -125,7 +146,6 @@ function App() {
               onClick={(e) => {
                 e.preventDefault();
                 isValid();
-
               }}
               className="px-3 py-2 tracking-wider text-gray-600 transition-all duration-150 bg-white rounded-md hover:shadow-xl hover:shadow-white/10 w-fit"
             >

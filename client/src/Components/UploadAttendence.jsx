@@ -1,12 +1,9 @@
-
 import Forms from "./Forms";
 import Input from "./Input";
-import {useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Profile from "./Profile";
 import ProfilePic from "../ProfilePic";
-
-
-
+import { Axios } from "axios";
 
 function UploadAttendence() {
   const [name, setName] = useState("");
@@ -15,11 +12,7 @@ function UploadAttendence() {
   const [take, setTake] = useState(false);
   const [picture, setPicture] = useState("");
   const [done, setDone] = useState(-1);
-  const [student , setStudent] = useState(true);
-  const id = useRef(null);
-
-
-
+  const [student, setStudent] = useState(true);
 
   function isValid() {
     if (name.length === 0) {
@@ -42,29 +35,29 @@ function UploadAttendence() {
       return;
     }
 
+    Axios.post("https://www.img.roohpehchan.co/multi").then((res) => {
+      alert(res.data);
+    });
     setDone(-1);
   }
 
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen overflow-hidden bg-gray-800 ">
-
-
       {!take && (
         <Forms>
           <div className="flex items-center gap-x-1">
-
-          <p className="font-mono text-3xl font-semibold tracking-widest text-center text-white to-white">
-            Register Student
-          </p>
-
+            <p className="font-mono text-2xl font-semibold tracking-widest text-center text-white to-white flex w-full justify-center">
+              Uploading Attendance
+            </p>
           </div>
 
           <div>
-            <Input data={name} label={"Name "} setData={setName} type={"text"} />
-            {done === 0 && (
-              <p className="mb-1 text-sm text-red-500 ">**wrong input</p>
-            )}
-            <Input data={roll} label={"Roll No "} setData={setRollNo} type={"text"} />
+            <Input
+              data={roll}
+              label={"Subject "}
+              setData={setRollNo}
+              type={"text"}
+            />
             {done === 1 && (
               <p className="mb-1 text-sm text-red-500 ">**wrong input</p>
             )}
@@ -120,7 +113,6 @@ function UploadAttendence() {
               onClick={(e) => {
                 e.preventDefault();
                 isValid();
-
               }}
               className="px-3 py-2 tracking-wider text-gray-600 transition-all duration-150 bg-white rounded-md hover:shadow-xl hover:shadow-white/10 w-fit"
             >
