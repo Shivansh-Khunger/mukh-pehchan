@@ -13,7 +13,7 @@ function LandingPage(){
         <Routes>
             <Route index element= {<App/>}/>
             <Route path="/a" element = {<Attendence/>}/>
-            <Route path='/asd' element = {<UploadAttendence/>}/>
+            <Route path='/x' element = {<UploadAttendence/>}/>
         </Routes>
         </BrowserRouter>
     )

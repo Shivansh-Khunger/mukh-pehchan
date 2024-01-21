@@ -3,6 +3,7 @@ import Input from "./Input";
 import { useEffect, useRef, useState } from "react";
 import Profile from "./Profile";
 import ProfilePic from "../ProfilePic";
+import axios from "axios";
 
 import {
   Link,
@@ -22,7 +23,7 @@ function Attendence() {
   const navigate = useNavigate();
 
   function isValid() {
-    Axios.post("https://www.usr.roohpehchan.co/st/login", {
+    axios.post("https://www.usr.roohpehchan.co/st/login", {
       staffEmail: name,
       staffPassword: pass,
     }).then((res) => {
@@ -44,7 +45,7 @@ function Attendence() {
           className="mb-1 text-2xl font-semibold text-white hover:font-bold"
           to={"/a"}
         >
-          Upload Attendence
+          Teacher Login
         </NavLink>
       </div>
 
@@ -86,7 +87,7 @@ function Attendence() {
               e.preventDefault();
               isValid();
             }}
-            className="px-3 py-2 tracking-wider text-gray-600 transition-all duration-150 bg-white rounded-md hover:shadow-xl hover:shadow-white/10 w-fit"
+            className="px-3 py-2 tracking-wider text-gray-600 transition-all duration-150 bg-white rounded-md hover:shadow-xl hover:shadow-white/10 w-full justify-center"
           >
             SUBMIT
           </button>

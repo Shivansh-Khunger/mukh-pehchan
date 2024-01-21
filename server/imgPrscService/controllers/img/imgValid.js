@@ -34,6 +34,7 @@ export async function MultiImgValid(req, res) {
     ];
 
     const formData = {
+      purposeCompleted: true,
       2210992324: 1,
       2210990776: 1,
       2210990749: 1,

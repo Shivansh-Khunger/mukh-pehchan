@@ -3,7 +3,7 @@ import Input from "./Input";
 import { useRef, useState } from "react";
 import Profile from "./Profile";
 import ProfilePic from "../ProfilePic";
-import { Axios } from "axios";
+import axios from "axios";
 
 function UploadAttendence() {
   const [name, setName] = useState("");
@@ -13,32 +13,23 @@ function UploadAttendence() {
   const [picture, setPicture] = useState("");
   const [done, setDone] = useState(-1);
   const [student, setStudent] = useState(true);
+  const id = useRef(null);
 
-  function isValid() {
-    if (name.length === 0) {
-      setDone(0);
-      return;
-    }
+  async function isValid() {
     if (roll.length === 0) {
       setDone(1);
       return;
     }
-    var i = 0;
-    for (i = 0; i < roll.length; i++) {
-      if (roll[i] < "0" || roll[i] > "9") {
-        setDone(1);
-        return;
-      }
-    }
-    if (picture === "") {
-      setDone(2);
-      return;
-    }
 
-    Axios.post("https://www.img.roohpehchan.co/multi").then((res) => {
-      alert(res.data);
-    });
-    setDone(-1);
+    await axios
+      .post("https://www.img.roohpehchan.co/up/multi")
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      }),
+      setDone(-1);
   }
 
   return (
