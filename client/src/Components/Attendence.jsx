@@ -45,7 +45,7 @@ function Attendence() {
           className="mb-1 text-2xl font-semibold text-white hover:font-bold"
           to={"/a"}
         >
-          Teacher Login
+          Upload Attendance
         </NavLink>
       </div>
 
@@ -53,7 +53,7 @@ function Attendence() {
         <Forms>
           <div className="flex items-center gap-x-1">
             <p className="font-mono text-3xl font-semibold tracking-widest text-center text-white to-white">
-              Upload Attendence
+              Teacher Login
             </p>
           </div>
 
